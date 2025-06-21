@@ -5,7 +5,7 @@ import configs
 
 pygame.init()
 
-window = pygame.display.set_mode((configs.SCREEN_WIDTH, configs.SCREEN_HEIGHT))
+window = pygame.display.set_mode((configs.Screen_and_Graphics.SCREEN_WIDTH, configs.Screen_and_Graphics.SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 
 running = True
@@ -25,7 +25,7 @@ class Snake:
 while running:
     if begin:
         begin = False
-        snake_rect = pygame.rect.Rect([200, 200, configs.SNAKE_PART_SIZE, configs.SNAKE_PART_SIZE])
+        snake_rect = pygame.rect.Rect([200, 200, configs.Snake.SNAKE_PART_SIZE, configs.Snake.SNAKE_PART_SIZE])
         snake_length = 1
         snake_parts = []
         snake_direction = Vector2(0, 0)
@@ -34,19 +34,22 @@ while running:
             running = False
 
 
-    window.fill(configs.BG_COLOUR)
+    window.fill(configs.Screen_and_Graphics.BG_COLOUR)
 
-    for i in range(0, configs.SCREEN_SIZE, configs.GRID_CELL_SIZE):
-        pygame.draw.line(window, configs.GRID_COLOUR, (i, 0), (i, configs.SCREEN_SIZE))
-        pygame.draw.line(window, configs.GRID_COLOUR, (0, i), (configs.SCREEN_SIZE, i))
+    for i in range(0, configs.Screen_and_Graphics.SCREEN_SIZE, configs.Grid.GRID_CELL_SIZE):
+        pygame.draw.line(window, configs.Grid.GRID_COLOUR, (i, 0), (i, configs.Screen_and_Graphics.
+                                                                    SCREEN_SIZE))
+        pygame.draw.line(window, configs.Grid.GRID_COLOUR, (0, i), (configs.Screen_and_Graphics.
+                                                                    SCREEN_SIZE,
+                                                               i))
 
     snake_rect.move_ip(snake_direction)
     Snake.show_snake_parts()
 
-    [pygame.draw.rect(window, configs.SNAKE_COLOUR, snake_part) for snake_part in snake_parts]
+    [pygame.draw.rect(window, configs.Snake.SNAKE_COLOUR, snake_part) for snake_part in snake_parts]
 
     update_screen()
 
-    clock.tick(configs.FPS)
+    clock.tick(configs.Screen_and_Graphics.FPS)
 
 pygame.quit()
